@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="1000" height="650">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050914" />
+      <stop offset="100%" stop-color="#091024" />
+    </linearGradient>
+    <linearGradient id="indigoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14214d" />
+      <stop offset="100%" stop-color="#0a122e" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="650" fill="url(#bgGrad)" />
+
+  <text x="500" y="45" fill="#f8fafc" font-family="-apple-system, sans-serif" font-weight="900" font-size="22" text-anchor="middle">Zero-Trust IKEv2 &amp; IPsec Architecture</text>
+  <text x="500" y="70" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13" text-anchor="middle">RFC 7296 IKEv2 Control Plane &amp; RFC 4303 IPsec ESP Route-Based Tunneling</text>
+
+  <!-- Left: Initiator Gateway -->
+  <rect x="50" y="110" width="380" height="490" rx="10" fill="url(#nodeGrad)" stroke="#818cf8" stroke-width="2" />
+  <rect x="70" y="125" width="340" height="26" rx="4" fill="url(#indigoGrad)" />
+  <text x="240" y="143" fill="#050914" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Initiator Gateway (Enterprise Campus / Branch)</text>
+  
+  <text x="70" y="180" fill="#94a3b8" font-family="sans-serif" font-size="11">Public IP: 203.0.113.1 | Subnet: 10.100.0.0/16</text>
+  <text x="70" y="205" fill="#a5b4fc" font-family="monospace" font-weight="bold" font-size="11">Phase 1 IKEv2 Security Association (SA):</text>
+  <text x="90" y="225" fill="#cbd5e1" font-family="monospace" font-size="10">• Encryption: AES-GCM-256 (AEAD)</text>
+  <text x="90" y="245" fill="#cbd5e1" font-family="monospace" font-size="10">• PRF: PRF_HMAC_SHA2_256</text>
+  <text x="90" y="265" fill="#cbd5e1" font-family="monospace" font-size="10">• Integrity: NONE (Integrated in GCM)</text>
+  <text x="90" y="285" fill="#cbd5e1" font-family="monospace" font-size="10">• Diffie-Hellman: Group 19 (P-256 ECP)</text>
+
+  <text x="70" y="325" fill="#38bdf8" font-family="monospace" font-weight="bold" font-size="11">Phase 2 IPsec Child SA (ESP):</text>
+  <text x="90" y="345" fill="#cbd5e1" font-family="monospace" font-size="10">• Data Protocol: IP Protocol 50 (ESP)</text>
+  <text x="90" y="365" fill="#cbd5e1" font-family="monospace" font-size="10">• Confidentiality: AES-GCM-256</text>
+  <text x="90" y="385" fill="#cbd5e1" font-family="monospace" font-size="10">• Perfect Forward Secrecy: Group 19</text>
+  <text x="90" y="405" fill="#cbd5e1" font-family="monospace" font-size="10">• Route-Based Mode: VTI Tunnel100</text>
+
+  <text x="70" y="445" fill="#34d399" font-family="monospace" font-weight="bold" font-size="11">Reliability &amp; Traversal Controls:</text>
+  <text x="90" y="465" fill="#cbd5e1" font-family="monospace" font-size="10">• DPD: 10s interval, 3 retries (periodic)</text>
+  <text x="90" y="485" fill="#cbd5e1" font-family="monospace" font-size="10">• NAT-Traversal: UDP 4500 (Non-ESP marker)</text>
+  <text x="90" y="505" fill="#cbd5e1" font-family="monospace" font-size="10">• Anti-Replay: 256 packet sliding window</text>
+  <text x="90" y="525" fill="#cbd5e1" font-family="monospace" font-size="10">• Pre-Shared Key: 32-char high-entropy secret</text>
+
+  <rect x="70" y="550" width="340" height="35" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" />
+  <text x="240" y="572" fill="#34d399" font-family="sans-serif" font-weight="bold" font-size="11" text-anchor="middle">✓ NIST SP 800-77 R1 Compliant (Grade A+)</text>
+
+  <!-- Right: Responder Gateway -->
+  <rect x="570" y="110" width="380" height="490" rx="10" fill="url(#nodeGrad)" stroke="#06b6d4" stroke-width="2" />
+  <rect x="590" y="125" width="340" height="26" rx="4" fill="url(#indigoGrad)" />
+  <text x="760" y="143" fill="#050914" font-family="sans-serif" font-weight="bold" font-size="12" text-anchor="middle">Responder Gateway (AWS / Azure / Cloud VPC)</text>
+  
+  <text x="590" y="180" fill="#94a3b8" font-family="sans-serif" font-size="11">Public IP: 198.51.100.1 | Subnet: 172.16.0.0/16</text>
+  <text x="590" y="205" fill="#a5b4fc" font-family="monospace" font-weight="bold" font-size="11">Responder Cryptographic Policy:</text>
+  <text x="610" y="225" fill="#cbd5e1" font-family="monospace" font-size="10">• Policy ENCR: AES-GCM-256 (MATCHED)</text>
+  <text x="610" y="245" fill="#cbd5e1" font-family="monospace" font-size="10">• Policy PRF: PRF_HMAC_SHA2_256 (MATCHED)</text>
+  <text x="610" y="265" fill="#cbd5e1" font-family="monospace" font-size="10">• Policy INTEG: NONE (MATCHED)</text>
+  <text x="610" y="285" fill="#cbd5e1" font-family="monospace" font-size="10">• Policy DH: Group 19 (P-256 ECP) (MATCHED)</text>
+
+  <text x="590" y="325" fill="#38bdf8" font-family="monospace" font-weight="bold" font-size="11">Child SA Traffic Selector Policy:</text>
+  <text x="610" y="345" fill="#cbd5e1" font-family="monospace" font-size="10">• Expected Remote: 10.100.0.0/16 (MATCHED)</text>
+  <text x="610" y="365" fill="#cbd5e1" font-family="monospace" font-size="10">• Expected Local: 172.16.0.0/16 (MATCHED)</text>
+  <text x="610" y="385" fill="#cbd5e1" font-family="monospace" font-size="10">• ESP Proposal: AES-GCM-256 (MATCHED)</text>
+  <text x="610" y="405" fill="#cbd5e1" font-family="monospace" font-size="10">• PFS Group: Group 19 (MATCHED)</text>
+
+  <text x="590" y="445" fill="#34d399" font-family="monospace" font-weight="bold" font-size="11">State Machine Status:</text>
+  <text x="610" y="465" fill="#34d399" font-family="monospace" font-size="10">• Verdict: IKE_SA_ESTABLISHED (34)</text>
+  <text x="610" y="485" fill="#34d399" font-family="monospace" font-size="10">• Child SA: ACTIVE (ESP Inbound &amp; Outbound)</text>
+  <text x="610" y="505" fill="#cbd5e1" font-family="monospace" font-size="10">• Rekeying: 3600s with fresh DH exchange</text>
+  <text x="610" y="525" fill="#cbd5e1" font-family="monospace" font-size="10">• Telemetry: Prometheus Metrics Exported</text>
+
+  <rect x="590" y="550" width="340" height="35" rx="6" fill="rgba(6, 182, 212, 0.15)" stroke="#06b6d4" />
+  <text x="760" y="572" fill="#22d3ee" font-family="sans-serif" font-weight="bold" font-size="11" text-anchor="middle">✓ AWS Virtual Private Gateway Attached</text>
+
+  <!-- Middle: Encrypted Transit Pipeline -->
+  <line x1="430" y1="250" x2="570" y2="250" stroke="#818cf8" stroke-width="3" stroke-dasharray="4" />
+  <rect x="450" y="235" width="100" height="25" rx="4" fill="#060a1a" stroke="#818cf8" />
+  <text x="500" y="252" fill="#a5b4fc" font-family="monospace" font-size="10" text-anchor="middle">IKE (UDP 500)</text>
+
+  <line x1="430" y1="365" x2="570" y2="365" stroke="#10b981" stroke-width="4" />
+  <rect x="445" y="350" width="110" height="25" rx="4" fill="#060a1a" stroke="#10b981" />
+  <text x="500" y="367" fill="#34d399" font-family="monospace" font-size="10" text-anchor="middle">ESP (UDP 4500)</text>
+</svg>
